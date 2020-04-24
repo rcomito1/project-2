@@ -1,15 +1,15 @@
 // jshint esversion: 6
 
-let main = function(){
+let controller = function(){
 
-    let prefixURL = "http://api.flickr.com/services/feeds/photos_public.gne?tags=";
+    let prefixURL = "https://api.flickr.com/services/feeds/photos_public.gne?tags=";
     let suffixURL = "&format=json&jsoncallback=?";
     //get value entered by user from textbox
-    let flickrTag = $("input").???();
+    let flickrTag = $("input").val();
     let requestURL = prefixURL + flickrTag + suffixURL;
 
     //clear old photos
-    $(".photos").???("");
+    $(".photos").html("");
 
   $.getJSON(requestURL, function(flickrResponse) {
     flickrResponse.items.forEach(function(item, index) {
@@ -36,5 +36,10 @@ let main = function(){
   });
 };
 
+window.addEventListener("load", function() {
+  //select the button
+  let button = document.querySelector("button");
 
-$(document).ready(main);
+  //register the click handler for the button
+  button.addEventListener("click", controller);
+});
